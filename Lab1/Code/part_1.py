@@ -6,12 +6,17 @@ K = 10 # 将标准分词文件的9/10作为训练集
 
 '''
     3.1 词典的构建
-    输入文件：199801_seg&pos.txt
-    输出：dic.txt（自己形成的分词词典)
+    输入文件：199801_seg&pos.txt（1998 年 1 月《人民日报》的分词语料库） 、199801_sent.txt（1998 年 1 月《人民日报》语料，未分词）
+    输出：dic.txt（自己形成的分词词典)、train.txt（训练集）、std.txt（标准答案）、test.txt（测试集）
 '''
 
-# 生成分词词典
+
 def gene_dic(train_path =Train_File, dic_path = Dic_File):
+    '''
+        生成分词词典
+        input: train.txt
+        output: dic.txt
+    '''
     word_set = set()  # 词列表, 有序且不重复
     max_len = 0   # 最大词长
     with open(train_path, 'r') as train_file:  # 读取训练文本
@@ -30,8 +35,13 @@ def gene_dic(train_path =Train_File, dic_path = Dic_File):
         dic_file.write('\n'.join(word_list))  # 用 '\n' 连接成新字符串
     return word_list, max_len
 
-# 按9:1生成训练集和测试集
+
 def gene_train_std(seg_path ='../io_files/199801_seg&pos.txt', train_path = Train_File, std_path = Std_File, k = K):
+    '''
+        按9:1生成训练集和测试集
+        input: 199801_seg&pos.txt
+        output: train.txt, std.txt, test.txt
+    '''
     with open(seg_path, 'r') as seg_file:
         seg_lines = seg_file.readlines()
     std_lines = [] # 标准分词答案
@@ -45,8 +55,13 @@ def gene_train_std(seg_path ='../io_files/199801_seg&pos.txt', train_path = Trai
         std_file.write(''.join(std_lines)) # 写入标准分词答案
     gene_test() # 生成测试集
 
-# 生成测试集
+
 def gene_test(sent_path = '../io_files/199801_sent.txt', test_path = Test_File, k = K):
+    '''
+        生成测试集
+        input: 199801_sent.txt
+        output: test.txt
+    '''
     with open(sent_path, 'r') as sent_file:
         sent_lines = sent_file.readlines()
     with open(test_path, 'w') as test_file:

@@ -4,7 +4,7 @@ BMM_File = '../io_files/seg_BMM.txt'
 Test_File = '../io_files/test.txt'
 '''
     3.2 正反向最大匹配分词实现
-    输入文件：199801_sent.txt（1998 年 1 月《人民日报》语料，未分词）dic.txt(自己形成的分词词典)
+    输入文件：test.txt（测试集）、dic.txt(自己形成的分词词典)
     输出：seg_FMM.txt 和 seg_BMM.txt(正反向最大匹配分词结果，格式参照分词语料 “词/_词/_......”)
 '''
 Max_Len = 0  # 最大词长
@@ -57,6 +57,8 @@ def BMM(test_path = Test_File, bmm_path = BMM_File):
         for line in lines:
             line = line.strip() # 去除结尾换行符
             seg_list = [] # 分割后字段
+            if line != '':
+                seg_list.append('/ ')
             while len(line) > 0:
                 tryword = line if len(line) < Max_Len else line[len(line) - Max_Len:] # 从后开始 取最大词长的字符串
                 while tryword not in Words:
@@ -68,8 +70,6 @@ def BMM(test_path = Test_File, bmm_path = BMM_File):
                 if not tryword.isascii():  # 当前位或下一位不在ASCII码中 进行分割
                     seg_list.insert(0 , '/ ')  # 在词前用 '/' 和 ' ' 进行分隔
                 line = line[ : len(line)-len(tryword)]
-            if line != '':
-                seg_list.append('/ ')
             bmm_file.write(''.join(seg_list) + '\n')  # 写入换行符
         print('BMM cut over!')
 
