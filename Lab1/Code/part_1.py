@@ -14,8 +14,8 @@ K = 10 # 将标准分词文件的9/10作为训练集
 def gene_dic(train_path =Train_File, dic_path = Dic_File):
     '''
         生成分词词典
-        input: train.txt
-        output: dic.txt
+        input: train.txt(训练集)
+        output: dic.txt(分词词典)
     '''
     word_set = set()  # 词列表, 有序且不重复
     max_len = 0   # 最大词长
@@ -39,8 +39,8 @@ def gene_dic(train_path =Train_File, dic_path = Dic_File):
 def gene_train_std(seg_path ='../io_files/199801_seg&pos.txt', train_path = Train_File, std_path = Std_File, k = K):
     '''
         按9:1生成训练集和测试集
-        input: 199801_seg&pos.txt
-        output: train.txt, std.txt, test.txt
+        input: 199801_seg&pos.txt(分词语料库)
+        output: train.txt(训练集), std.txt(标准答案), test.txt(测试集)
     '''
     with open(seg_path, 'r') as seg_file:
         seg_lines = seg_file.readlines()
@@ -59,8 +59,8 @@ def gene_train_std(seg_path ='../io_files/199801_seg&pos.txt', train_path = Trai
 def gene_test(sent_path = '../io_files/199801_sent.txt', test_path = Test_File, k = K):
     '''
         生成测试集
-        input: 199801_sent.txt
-        output: test.txt
+        input: 199801_sent.txt(未分词语料)
+        output: test.txt(测试集)
     '''
     with open(sent_path, 'r') as sent_file:
         sent_lines = sent_file.readlines()

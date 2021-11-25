@@ -10,8 +10,13 @@ Score_File = '../io_files/score.txt'
     输出：score.txt(包括准确率（precision）、召回率（recall），F 值的结果文件)
 '''
 
-# 计算评测得分
+
 def score(std_path=Std_File, fmm_path=FMM_File, bmm_path=BMM_File, score_path=Score_File, k=1):
+    '''
+        计算评测得分
+        input: std.txt(标准分词文件), seg_FMM.txt(FMM模型分词文件), seg_BMM.txt(BMM模型分词文件)
+        output: score.txt(评测结果)
+    '''
     FMM_correct_words, FMM_std_words, FMM_my_words = count(fmm_path, std_path)
     BMM_correct_words, BMM_std_words, BMM_my_words = count(bmm_path, std_path)
     FMM_precision, FMM_recall, FMM_f_value = calc(FMM_correct_words, FMM_std_words, FMM_my_words, k)
@@ -32,8 +37,13 @@ def score(std_path=Std_File, fmm_path=FMM_File, bmm_path=BMM_File, score_path=Sc
         score_file.write('召回率: '+str(BMM_recall * 100)+' %\n')
         score_file.write('F值: '+str(BMM_f_value * 100)+' %\n')
 
-# 计算总词数和正确词数
+
 def count(file_path, std_path):
+    '''
+        计算总词数和正确词数
+        input: std.txt(标准分词文件), (seg_FMM.txt / seg_BMM.txt)(模型分词文件)
+        return: correct_words(正确分词数), std_words(标准分词数), my_words(模型分词数)
+    '''
     correct_words = 0
     std_words = 0
     my_words = 0
@@ -66,8 +76,13 @@ def count(file_path, std_path):
                 seg_line = seg_file.readline()
     return correct_words, std_words, my_words
 
-# 计算准确率 召回率和f值
+
 def calc(correct_words, std_words, my_words, k):
+    '''
+        计算准确率 召回率和f值
+        input: correct_words(正确分词数), std_words(标准分词数), my_words(模型分词数)
+        return: precision(准确率), recall(召回率), f_value(f值)
+    '''
     precision = 0
     recall = 0
     f_value = 0
@@ -77,11 +92,12 @@ def calc(correct_words, std_words, my_words, k):
     # print('{}, {}, {}'.format(precision,recall,f_value))
     return precision, recall, f_value
 
-
-# 获取词对应下标
-
-
 def get_index(line):
+    '''
+        获取词对应下标
+        input: line(一行待分词字符)
+        return: indexes(每个词对应的下标的列表)
+    '''
     indexes = []
     index = 0
     indexes.append(index)

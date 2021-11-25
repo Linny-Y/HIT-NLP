@@ -10,8 +10,12 @@ Test_File = '../io_files/test.txt'
 Max_Len = 0  # 最大词长
 Words = []  # 词典列表
 
-# 读取词典内容存入 Words
+
 def get_dic(dic_path = Dic_File):
+    '''
+        读取词典内容存入 Words
+        input: dic.txt(分词词典)
+    '''
     global Max_Len
     with open(dic_path, 'r') as dic_file: 
         lines = dic_file.readlines()  # 按行读取词典内容
@@ -26,8 +30,13 @@ def get_dic(dic_path = Dic_File):
         if(line_len > Max_Len):
             Max_Len = line_len  # 更新最大词长
 
-# 正向最大匹配分词
+
 def FMM(test_path = Test_File, fmm_path = FMM_File):
+    '''
+        正向最大匹配分词
+        input: test.txt(测试集)
+        output: seg_FMM.txt(FMM模型分词)
+    '''
     with open(test_path, 'r') as test_file:
         lines = test_file.readlines()
     with open(fmm_path, 'w') as fmm_file:
@@ -49,8 +58,13 @@ def FMM(test_path = Test_File, fmm_path = FMM_File):
             fmm_file.write(''.join(seg_list) + '\n')  # 写入换行符
         print('FMM cut over!')
 
-# 反向最大匹配分词                
+               
 def BMM(test_path = Test_File, bmm_path = BMM_File):
+    '''
+        反向最大匹配分词
+        input: test.txt(测试集)
+        output: seg_BMM.txt(BMM模型分词)
+    '''
     with open(test_path, 'r') as test_file:
         lines = test_file.readlines()
     with open(bmm_path, 'w') as bmm_file:
