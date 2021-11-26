@@ -6,8 +6,8 @@ Score_File = '../io_files/score.txt'
 
 '''
     3.3 正反向最大匹配分词效果分析
-    输入文件：std.txt（标准答案）、seg_FMM.txt、seg_BMM.txt
-    输出：score.txt(包括准确率（precision）、召回率（recall），F 值的结果文件)
+    输入文件：std.txt(标准答案)、seg_FMM.txt、seg_BMM.txt
+    输出：score.txt(包括准确率(precision)、召回率(recall)，F 值的结果文件)
 '''
 
 

@@ -4,7 +4,7 @@ BMM_File = '../io_files/seg_BMM.txt'
 Test_File = '../io_files/test.txt'
 '''
     3.2 正反向最大匹配分词实现
-    输入文件：test.txt（测试集）、dic.txt(自己形成的分词词典)
+    输入文件：test.txt(测试集)、dic.txt(自己形成的分词词典)
     输出：seg_FMM.txt 和 seg_BMM.txt(正反向最大匹配分词结果，格式参照分词语料 “词/_词/_......”)
 '''
 Max_Len = 0  # 最大词长
