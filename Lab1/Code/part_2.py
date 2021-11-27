@@ -1,7 +1,7 @@
-Dic_File = '../io_files/dic.txt'
-FMM_File = '../io_files/seg_FMM.txt'
-BMM_File = '../io_files/seg_BMM.txt'
-Test_File = '../io_files/test.txt'
+DIC_FILE = '../io_files/dic.txt'
+FMM_FILE = '../io_files/seg_FMM.txt'
+BMM_FILE = '../io_files/seg_BMM.txt'
+TEST_FILE = '../io_files/test.txt'
 '''
     3.2 正反向最大匹配分词实现
     输入文件：test.txt(测试集)、dic.txt(自己形成的分词词典)
@@ -11,7 +11,7 @@ Max_Len = 0  # 最大词长
 Words = []  # 词典列表
 
 
-def get_dic(dic_path = Dic_File):
+def get_dic(dic_path = DIC_FILE):
     '''
         读取词典内容存入 Words
         input: dic.txt(分词词典)
@@ -31,7 +31,7 @@ def get_dic(dic_path = Dic_File):
             Max_Len = line_len  # 更新最大词长
 
 
-def FMM(test_path = Test_File, fmm_path = FMM_File):
+def FMM(test_path = TEST_FILE, fmm_path = FMM_FILE):
     '''
         正向最大匹配分词
         input: test.txt(测试集)
@@ -59,7 +59,7 @@ def FMM(test_path = Test_File, fmm_path = FMM_File):
         print('FMM cut over!')
 
                
-def BMM(test_path = Test_File, bmm_path = BMM_File):
+def BMM(test_path = TEST_FILE, bmm_path = BMM_FILE):
     '''
         反向最大匹配分词
         input: test.txt(测试集)

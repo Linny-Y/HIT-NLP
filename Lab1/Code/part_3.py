@@ -1,8 +1,8 @@
 
-FMM_File = '../io_files/seg_FMM.txt'
-BMM_File = '../io_files/seg_BMM.txt'
-Std_File = '../io_files/std.txt'
-Score_File = '../io_files/score.txt'
+FMM_FILE = '../io_files/seg_FMM.txt'
+BMM_FILE = '../io_files/seg_BMM.txt'
+STD_FILE = '../io_files/std.txt'
+SCORE_FILE = '../io_files/score.txt'
 
 '''
     3.3 正反向最大匹配分词效果分析
@@ -11,7 +11,7 @@ Score_File = '../io_files/score.txt'
 '''
 
 
-def score(std_path=Std_File, fmm_path=FMM_File, bmm_path=BMM_File, score_path=Score_File, k=1):
+def score(std_path=STD_FILE, fmm_path=FMM_FILE, bmm_path=BMM_FILE, score_path=SCORE_FILE, k=1):
     '''
         计算评测得分
         input: std.txt(标准分词文件), seg_FMM.txt(FMM模型分词文件), seg_BMM.txt(BMM模型分词文件)

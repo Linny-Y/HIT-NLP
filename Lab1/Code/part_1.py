@@ -1,7 +1,7 @@
-Dic_File = '../io_files/dic.txt'
-Train_File = '../io_files/train.txt'
-Std_File = '../io_files/std.txt'
-Test_File = '../io_files/test.txt'
+DIC_FILE = '../io_files/dic.txt'
+TRAIN_FILE = '../io_files/train.txt'
+STD_FILE = '../io_files/std.txt'
+TEST_FILE = '../io_files/test.txt'
 K = 10 # 将标准分词文件的9/10作为训练集
 
 '''
@@ -11,7 +11,7 @@ K = 10 # 将标准分词文件的9/10作为训练集
 '''
 
 
-def gene_dic(train_path =Train_File, dic_path = Dic_File):
+def gene_dic(train_path =TRAIN_FILE, dic_path = DIC_FILE):
     '''
         生成分词词典
         input: train.txt(训练集)
@@ -36,7 +36,7 @@ def gene_dic(train_path =Train_File, dic_path = Dic_File):
     return word_list, max_len
 
 
-def gene_train_std(seg_path ='../io_files/199801_seg&pos.txt', train_path = Train_File, std_path = Std_File, k = K):
+def gene_train_std(seg_path ='../io_files/199801_seg&pos.txt', train_path = TRAIN_FILE, std_path = STD_FILE, k = K):
     '''
         按9:1生成训练集和测试集
         input: 199801_seg&pos.txt(分词语料库)
@@ -56,7 +56,7 @@ def gene_train_std(seg_path ='../io_files/199801_seg&pos.txt', train_path = Trai
     gene_test() # 生成测试集
 
 
-def gene_test(sent_path = '../io_files/199801_sent.txt', test_path = Test_File, k = K):
+def gene_test(sent_path = '../io_files/199801_sent.txt', test_path = TEST_FILE, k = K):
     '''
         生成测试集
         input: 199801_sent.txt(未分词语料)

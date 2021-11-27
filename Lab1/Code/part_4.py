@@ -6,6 +6,12 @@ from part_2 import *
     输出：TimeCost.txt(分词所用时间)
 """
 
+class Node:
+    def __init__(self):
+        self.isleaf = False
 
 
 
+if __name__ == '__main__':
+    word = [None] * 3
+    print(word)
