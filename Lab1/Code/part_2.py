@@ -1,4 +1,4 @@
-
+# from part_4 import *
 
 DIC_FILE = '../io_files/dic.txt'
 FMM_FILE = '../io_files/seg_FMM.txt'
@@ -60,7 +60,7 @@ def FMM(test_path = TEST_FILE, fmm_path = FMM_FILE):
                     seg_list.append('/ ')  # 用 '/' 和 ' ' 进行分隔
                 line = line[len(tryword): ] # 更新未分割字符串
                 sum += len(tryword)
-                print('FMM '  +str(sum) + '/' + str(all))
+                # print('FMM '  +str(sum) + '/' + str(all))
             fmm_file.write(''.join(seg_list) + '\n')  # 写入换行符
         print('FMM cut over!')
 
@@ -93,7 +93,7 @@ def BMM(test_path = TEST_FILE, bmm_path = BMM_FILE):
                     seg_list.insert(0 , '/ ')  # 在词前用 '/' 和 ' ' 进行分隔
                 line = line[ : len(line)-len(tryword)]
                 sum += len(tryword)
-                print('BMM '  +str(sum) + '/' + str(all))
+                # print('BMM '  +str(sum) + '/' + str(all))
             bmm_file.write(''.join(seg_list) + '\n')  # 写入换行符
         print('BMM cut over!')
 

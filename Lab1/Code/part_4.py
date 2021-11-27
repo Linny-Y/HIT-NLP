@@ -49,12 +49,15 @@ class Node:
             字符串中没有字符不存在 遍历结束 返回该字符串长度
         """
         length = len(word)
+        res = 0
         for i,char in enumerate(word):
             exist, p = self.get_child_by_char(char)
+            if self.is_word:
+                res = i
             if not exist:
                 # if i == 0:  # i==0时不存在 返回1
                 #     return 1
-                return i
+                return res
             self = self.child_list[p]
         return length
             
@@ -139,15 +142,15 @@ def better_FMM(root, test_path = TEST_FILE, better_fmm_path = BETTER_FMM_FILE):
                     seg_list.append('/ ')  # 用 '/' 和 ' ' 进行分隔
                 line = line[length: ]
                 sum += len(tryword)
-                print('better_FMM '  +str(sum) + '/' + str(all))
+                # print('better_FMM '  +str(sum) + '/' + str(all))
             fmm_file.write(''.join(seg_list) + '\n')  # 写入换行符
-        print('FMM cut over!')
+        print('better FMM cut over!')
 
 def better_BMM(root, test_path = TEST_FILE, better_bmm_path = BETTER_BMM_FILE):
     '''
         优化后反向最大匹配分词
         input: test.txt(测试集)
-        output: better_seg_BMM.txt(FMM模型分词)
+        output: better_seg_BMM.txt(BMM模型分词)
     '''
     sum = 0
     with open(test_path, 'r') as test_file:
@@ -170,22 +173,23 @@ def better_BMM(root, test_path = TEST_FILE, better_bmm_path = BETTER_BMM_FILE):
                 tryword = tryword[ :length]
 
                 seg_list.append(tryword)
-                if not tryword.isascii() :
+                if not tryword.isascii()  or ((not len(line) == 1) and length == 1 and (not line[1].isascii())):
                     seg_list.append(' /')  # 用 '/' 和 ' ' 进行分隔
                 line = line[length: ]
                 sum += len(tryword)
-                print('better_BMM '  +str(sum) + '/' + str(all))
+                # print('better_BMM '  +str(sum) + '/' + str(all))
             bmm_file.write(''.join(seg_list)[::-1] + '\n')  # 写入换行符
-        print('BMM cut over!')
+        print('better BMM cut over!')
 
-if __name__ == '__main__':
-    # # part_2 全文分割
-    # root = get_dict_tree_FMM()
-    # better_FMM(root,test_path='../io_files/199801_sent.txt',better_fmm_path=FMM_FILE) 
+def all():
+    # part_2 全文分割
+    root = get_dict_tree_FMM()
+    better_FMM(root,test_path='../io_files/199801_sent.txt',better_fmm_path=FMM_FILE) 
     
-    # rootp = get_dict_tree_BMM()
-    # better_BMM(rootp,test_path='../io_files/199801_sent.txt',better_bmm_path=BMM_FILE) 
-    
+    rootp = get_dict_tree_BMM()
+    better_BMM(rootp,test_path='../io_files/199801_sent.txt',better_bmm_path=BMM_FILE) 
+
+def timer():
     ### 优化前
     get_dict('../io_files/dic.txt')
 
@@ -214,15 +218,25 @@ if __name__ == '__main__':
     cost_time_better_BMM = end_time_better_BMM - start_time_better_BMM
     # print(cost_time_better_BMM)
 
-    time_cost = open('../io_files/result/TimeCost.txt', 'w')
-    time_cost.write("优化前\n")
-    time_cost.write('FMM时间花销为：' + str(cost_time_FMM) + 's\n')
-    time_cost.write('BMM时间花销为：' + str(cost_time_BMM) + 's\n\n')
-    time_cost.write("优化后\n")
-    time_cost.write("FMM时间花销为：" + str(cost_time_better_FMM) + 's\n')
-    time_cost.write("FMM优化比例为：" + str((1-cost_time_better_FMM/cost_time_FMM)*100) + "%\n")
-    time_cost.write("BMM时间花销为：" + str(cost_time_better_BMM) + 's\n')
-    time_cost.write("BMM优化比例为：" + str((1-cost_time_better_BMM/cost_time_BMM)*100) + "%\n")
-    time_cost.close()
+    with open('../io_files/TimeCost.txt', 'w') as time_cost:
+        time_cost.write("优化前\n")
+        time_cost.write('FMM时间花销为：' + str(cost_time_FMM) + 's\n')
+        time_cost.write('BMM时间花销为：' + str(cost_time_BMM) + 's\n\n')
+        time_cost.write("优化后\n")
+        time_cost.write("FMM时间花销为：" + str(cost_time_better_FMM) + 's\n')
+        time_cost.write("FMM优化比例为：" + str((1-cost_time_better_FMM/cost_time_FMM)*100) + "%\n")
+        time_cost.write("BMM时间花销为：" + str(cost_time_better_BMM) + 's\n')
+        time_cost.write("BMM优化比例为：" + str((1-cost_time_better_BMM/cost_time_BMM)*100) + "%\n")
     print('Finish')
+
+
+
+if __name__ == '__main__':
+    # part_2
+    all()
+    # part_4
+    timer()
+    
+
+    
     

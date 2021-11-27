@@ -112,3 +112,4 @@ def get_index(line):
 if __name__ == '__main__':
     ## 全文
     score(std_path = '../io_files/199801_seg&pos.txt')
+    # score(std_path = '../std.txt',fmm_path='../seg_FMM.txt',bmm_path='../seg_BMM.txt',score_path = '../score.txt')
