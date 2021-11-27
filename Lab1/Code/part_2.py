@@ -37,8 +37,10 @@ def FMM(test_path = TEST_FILE, fmm_path = FMM_FILE):
         input: test.txt(测试集)
         output: seg_FMM.txt(FMM模型分词)
     '''
+    sum = 0
     with open(test_path, 'r') as test_file:
         lines = test_file.readlines()
+        all = len(''.join(lines).replace(" ","").replace("\n",""))
     with open(fmm_path, 'w') as fmm_file:
         for line in lines:
             line = line.strip() # 去除结尾换行符
@@ -54,7 +56,9 @@ def FMM(test_path = TEST_FILE, fmm_path = FMM_FILE):
                 seg_list.append(tryword)
                 if not tryword.isascii() or (len(tryword) == 1 and not line[1].isascii()):  # 当前位或下一位不在ASCII码中 进行分割
                     seg_list.append('/ ')  # 用 '/' 和 ' ' 进行分隔
-                line = line[len(tryword): ]
+                line = line[len(tryword): ] # 更新未分割字符串
+                sum += len(tryword)
+                print('FMM'  +str(sum) + '/' + str(all))
             fmm_file.write(''.join(seg_list) + '\n')  # 写入换行符
         print('FMM cut over!')
 
@@ -65,8 +69,10 @@ def BMM(test_path = TEST_FILE, bmm_path = BMM_FILE):
         input: test.txt(测试集)
         output: seg_BMM.txt(BMM模型分词)
     '''
+    sum = 0
     with open(test_path, 'r') as test_file:
         lines = test_file.readlines()
+        all = len(''.join(lines).replace(" ","").replace("\n",""))
     with open(bmm_path, 'w') as bmm_file:
         for line in lines:
             line = line.strip() # 去除结尾换行符
@@ -84,6 +90,8 @@ def BMM(test_path = TEST_FILE, bmm_path = BMM_FILE):
                 if not tryword.isascii():  # 当前位或下一位不在ASCII码中 进行分割
                     seg_list.insert(0 , '/ ')  # 在词前用 '/' 和 ' ' 进行分隔
                 line = line[ : len(line)-len(tryword)]
+                sum += len(tryword)
+                print('BMM'  +str(sum) + '/' + str(all))
             bmm_file.write(''.join(seg_list) + '\n')  # 写入换行符
         print('BMM cut over!')
 
