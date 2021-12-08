@@ -56,15 +56,15 @@ def count(file_path, std_path):
                     std_line = std_file.readline()
                 while seg_line == '\n':
                     seg_line = seg_file.readline()
-                std_index = get_index(std_line)
-                seg_index = get_index(seg_line)
-                std_words += len(std_index) - 1
-                my_words += len(seg_index) - 1
+                std_index = get_index(std_line) # 获取标准分词下标
+                seg_index = get_index(seg_line) # 获取模型分词下标
+                std_words += len(std_index) - 1 # 标准分词总词数
+                my_words += len(seg_index) - 1  # 模型分词总词数
                 head = 0
                 for i in range(len(std_index)-1):
                     for j in range(head, len(seg_index)-1):
                         if std_index[i] == seg_index[j] and std_index[i + 1] == seg_index[j + 1]:
-                            correct_words += 1
+                            correct_words += 1  # 正确分词数
                             # print(head)
                             head = j + 1
                             break

@@ -5,4 +5,7 @@ CLx2_实验评价技术_BLEU.pdf
 io_files
 data
 test
+output
 *.zip
+*.xlsx
+lyy.docx
